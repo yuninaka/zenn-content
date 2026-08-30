@@ -351,11 +351,3 @@ RETURN count(r) AS occurrence_count
 1. Symptomノードの名寄せ対応(カテゴリ辞書 or ベクトル類似度ベースのファジーマッチ)を実装し、Q1のスコア改善を検証する
 2. 合成データを30〜50件程度に拡張し、ノード種別(部品の型番・メーカー等)を増やす
 3. Azure Document Intelligenceの無料枠でOCR部分を実装し、パイプラインを実案件の構成によりを近づける
-
----
-
-**この記事は3部構成です。**
-
-- 第1弾(本記事): グラフRAG × ベクトルRAGの全体設計と精度評価
-- 第2弾: [グラフRAGの「名寄せ」を直したら、直した先で別のバグが見つかった話](https://zenn.dev/yuninaka/articles/zenn-graph-rag-symptom-normalization) — 上記9.2の1番目(Symptom名寄せ)を実際に実装し、その過程で見つかった別のバグと、精度評価スコアの見かけと中身の乖離についてまとめました
-- 第3弾: [件数が増えても壊れない「履歴を踏まえた抽出」をグラフRAGに実装する](https://zenn.dev/yuninaka/articles/zenn-graph-rag-backreference-detection) — 第2弾で残した「過去レポート履歴を踏まえた抽出」の課題に、スケールする設計で取り組みました
