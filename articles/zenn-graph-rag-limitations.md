@@ -15,6 +15,7 @@ published: true
 - 9問のゴールデンQAでキーワード網羅率による精度評価を行い、スコアが低かった質問を実データまで遡って原因分析した
 
 リポジトリ: [graph-rag-maintenance-demo](https://github.com/yuninaka/graph-rag-maintenance-demo)
+(この記事時点のコード: [`article-1-limitations`タグ](https://github.com/yuninaka/graph-rag-maintenance-demo/tree/article-1-limitations)。`main`はその後の記事で更新され続けています)
 
 ### 1.2 結果だけ先に:全体精度0.89、ただしvectorとgraphで明暗が分かれた
 

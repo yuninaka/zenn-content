@@ -14,6 +14,9 @@ published: true
 - 直したはずのCypher生成が想定通り動かず、プロンプトを直したら**別の場所に潜んでいたグラフ設計のバグ**(原因のクロス混入)が新たに発覚した
 - そのバグを直したら精度評価のスコアは**数値上は下がった**。中身を見ると実際にはより正確な結果になっており、「スコアが下がる=悪化」ではないケースを実測した
 
+リポジトリ: [graph-rag-maintenance-demo](https://github.com/yuninaka/graph-rag-maintenance-demo)
+(この記事時点のコード: [`article-2-symptom-normalization`タグ](https://github.com/yuninaka/graph-rag-maintenance-demo/tree/article-2-symptom-normalization)。`main`はその後の記事で更新され続けています)
+
 ### 1.2 結果だけ先に
 
 | type別 | 名寄せ前 | 名寄せ直後(バグ入り) | クロス混入修正後 |
