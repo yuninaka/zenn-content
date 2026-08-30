@@ -2,7 +2,7 @@
 title: "件数が増えても壊れない「履歴を踏まえた抽出」をグラフRAGに実装する"
 emoji: "🔗"
 type: "tech"
-topics: ["langchain", "neo4j", "rag", "llm", "python"]
+topics: ["langchain", "neo4j", "rag", "llm", "claude"]
 published: true
 ---
 

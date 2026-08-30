@@ -2,7 +2,7 @@
 title: "グラフRAGの「名寄せ」を直したら、直した先で別のバグが見つかった話"
 emoji: "🕸️"
 type: "tech"
-topics: ["langchain", "neo4j", "rag", "llm", "python"]
+topics: ["langchain", "neo4j", "rag", "llm", "claude"]
 published: true
 ---
 

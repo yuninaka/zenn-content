@@ -2,7 +2,7 @@
 title: "グラフRAG × ベクトルRAG 個人実証：設備保全ナレッジベースで見えた限界"
 emoji: "🔧"
 type: "tech"
-topics: ["langchain", "neo4j", "rag", "llm", "python"]
+topics: ["langchain", "neo4j", "rag", "llm", "claude"]
 published: true
 ---
 
