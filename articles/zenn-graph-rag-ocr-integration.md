@@ -171,9 +171,10 @@ Azure Document Intelligenceによる実際のAI-OCR連携を検証し、平均�
 
 ---
 
-**このシリーズはこれまで4記事構成です。**
+**このシリーズはこれまで5記事構成です。**
 
 - 第1弾: [グラフRAG × ベクトルRAG 個人実証:設備保全ナレッジベースで見えた限界](https://zenn.dev/yuninaka/articles/zenn-graph-rag-limitations)
 - 第2弾: [グラフRAGの「名寄せ」を直したら、直した先で別のバグが見つかった話](https://zenn.dev/yuninaka/articles/zenn-graph-rag-symptom-normalization)
 - 第3弾: [件数が増えても壊れない「履歴を踏まえた抽出」をグラフRAGに実装する](https://zenn.dev/yuninaka/articles/zenn-graph-rag-backreference-detection)
 - 第4弾(本記事): Azure Document Intelligenceとの実際のAI-OCR連携を検証
+- 第5弾: [OCRの誤読をLLMが勝手に直した話——グラフRAGパイプライン完成編](https://zenn.dev/yuninaka/articles/zenn-graph-rag-pipeline-completion) — OCR結果を既存パイプラインに接続し、誤読の伝播を実測しました
