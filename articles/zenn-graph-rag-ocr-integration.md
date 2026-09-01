@@ -166,7 +166,7 @@ Azure Document Intelligenceによる実際のAI-OCR連携を検証し、平均�
 
 次回は、これらのいずれかに進みたい。
 
-[^1]: `difflib.SequenceMatcher(None, a, b).ratio()` は `2.0 * M / T` で計算される。`M`は2つの文字列(`a`, `b`)から見つかった一致ブロックの文字数の合計、`T`は両方の文字列の長さの合計(`len(a) + len(b)`)。両方の文字列が完全に一致すれば`M = len(a) = len(b)`となり、比率は`1.0`になる。単なる「編集距離」ではなく、Ratcliff/Obershelpアルゴリズム(最長共通部分文字列を再帰的に探す方式)で一致ブロックを見つける点が特徴。
+[^1]: `difflib.SequenceMatcher(None, a, b).ratio()` は `2.0 * M / T` で計算される。`M`は2つの文字列(`a`, `b`)から見つかった一致ブロックの文字数の合計、`T`は両方の文字列の長さの合計(`len(a) + len(b)`)。両方の文字列が完全に一致すれば`M = len(a) = len(b)`となり、比率は`1.0`になる。単なる「編集距離」ではなく、Ratcliff/Obershelpアルゴリズム(最長共通部分文字列を再帰的に探す方式)で一致ブロックを見つける点が特徴。詳細は[Python公式ドキュメント(difflib)](https://docs.python.org/3/library/difflib.html)を参照。
 
 ---
 
