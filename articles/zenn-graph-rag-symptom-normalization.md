@@ -67,7 +67,7 @@ RETURN count(r) AS occurrence_count
 
 `Symptom.name`にはグラフ側では確かに`'異音'`という値しか存在しないのに、LLMは質問文の言葉(「ベアリングの異音」)をそのまま`name`に当てはめてしまっていた。`GraphCypherQAChain`のデフォルトのCypher生成プロンプトは、スキーマの型情報(プロパティ名と型)は渡すが、「このプロパティは統制語彙である」という**ドメイン固有の意味論**までは伝えない。グラフの構造を直しても、それを問い合わせるLLM側が構造の意図を知らなければ意味がない、ということを実感した。
 
-対策として、`GraphCypherQAChain.from_llm(cypher_prompt=...)`でCypher生成プロンプトを差し替え、カテゴリ一覧と「質問文の症状表現を、意味的に最も近いカテゴリへマッピングしてから完全一致で検索すること」を明示的に指示した。
+対策として、`GraphCypherQAChain.from_llm(cypher_prompt=...)`[^1]でCypher生成プロンプトを差し替え、カテゴリ一覧と「質問文の症状表現を、意味的に最も近いカテゴリへマッピングしてから完全一致で検索すること」を明示的に指示した。
 
 ```python
 CYPHER_GENERATION_TEMPLATE = """(...)
@@ -185,10 +185,13 @@ Symptomノードの名寄せというピンポイントな修正から始まり�
 
 いずれも実装には踏み込まず、`docs/troubleshooting_log.md`に記録するに留めている。次回、どちらかに着手する形で続きを検証したい。
 
+[^1]: `GraphCypherQAChain.from_llm()`は`cypher_prompt`にカスタムプロンプトを渡せる。クラス定義は[LangChain APIリファレンス(GraphCypherQAChain)](https://python.langchain.com/api_reference/community/chains/langchain_community.chains.graph_qa.cypher.GraphCypherQAChain.html)を参照(なお本文中でも触れた通り、このクラス自体は`langchain-community`パッケージの一部として非推奨化が進んでおり、将来的には`langchain-neo4j`パッケージ版への移行が案内されている)。
+
 ---
 
-**この記事は3部構成です。**
+**この記事は4部構成です。**
 
 - 第1弾: [グラフRAG × ベクトルRAG 個人実証:設備保全ナレッジベースで見えた限界](https://zenn.dev/yuninaka/articles/zenn-graph-rag-limitations) — 全体のアーキテクチャ設計と精度評価、Q1(0.00)の発見まで
 - 第2弾(本記事): Symptom正規化の実装で見つかった、グラフ設計のクロス混入バグと評価スコアの見かけと中身の乖離
 - 第3弾: [件数が増えても壊れない「履歴を踏まえた抽出」をグラフRAGに実装する](https://zenn.dev/yuninaka/articles/zenn-graph-rag-backreference-detection) — 本記事で残した「過去レポート履歴を踏まえた抽出」の課題に、スケールする設計で取り組みました
+- 第4弾: [デジタルネイティブPDFなのに「O」を「〇」と誤読した、Document Intelligenceの話](https://zenn.dev/yuninaka/articles/zenn-graph-rag-ocr-integration) — Azure Document Intelligence連携を実際に検証しました
