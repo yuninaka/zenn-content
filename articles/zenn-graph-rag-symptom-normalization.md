@@ -187,8 +187,9 @@ Symptomノードの名寄せというピンポイントな修正から始まり�
 
 ---
 
-**この記事は3部構成です。**
+**この記事は4部構成です。**
 
 - 第1弾: [グラフRAG × ベクトルRAG 個人実証:設備保全ナレッジベースで見えた限界](https://zenn.dev/yuninaka/articles/zenn-graph-rag-limitations) — 全体のアーキテクチャ設計と精度評価、Q1(0.00)の発見まで
 - 第2弾(本記事): Symptom正規化の実装で見つかった、グラフ設計のクロス混入バグと評価スコアの見かけと中身の乖離
 - 第3弾: [件数が増えても壊れない「履歴を踏まえた抽出」をグラフRAGに実装する](https://zenn.dev/yuninaka/articles/zenn-graph-rag-backreference-detection) — 本記事で残した「過去レポート履歴を踏まえた抽出」の課題に、スケールする設計で取り組みました
+- 第4弾: [デジタルネイティブPDFなのに「O」を「〇」と誤読した、Document Intelligenceの話](https://zenn.dev/yuninaka/articles/zenn-graph-rag-ocr-integration) — Azure Document Intelligence連携を実際に検証しました
