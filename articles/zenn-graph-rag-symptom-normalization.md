@@ -67,7 +67,7 @@ RETURN count(r) AS occurrence_count
 
 `Symptom.name`にはグラフ側では確かに`'異音'`という値しか存在しないのに、LLMは質問文の言葉(「ベアリングの異音」)をそのまま`name`に当てはめてしまっていた。`GraphCypherQAChain`のデフォルトのCypher生成プロンプトは、スキーマの型情報(プロパティ名と型)は渡すが、「このプロパティは統制語彙である」という**ドメイン固有の意味論**までは伝えない。グラフの構造を直しても、それを問い合わせるLLM側が構造の意図を知らなければ意味がない、ということを実感した。
 
-対策として、`GraphCypherQAChain.from_llm(cypher_prompt=...)`でCypher生成プロンプトを差し替え、カテゴリ一覧と「質問文の症状表現を、意味的に最も近いカテゴリへマッピングしてから完全一致で検索すること」を明示的に指示した。
+対策として、`GraphCypherQAChain.from_llm(cypher_prompt=...)`[^1]でCypher生成プロンプトを差し替え、カテゴリ一覧と「質問文の症状表現を、意味的に最も近いカテゴリへマッピングしてから完全一致で検索すること」を明示的に指示した。
 
 ```python
 CYPHER_GENERATION_TEMPLATE = """(...)
@@ -184,6 +184,8 @@ Symptomノードの名寄せというピンポイントな修正から始まり�
 2. **同一設備の過去レポート履歴を踏まえた抽出**: R005/R017のように、後続のレポートが過去のレポートの位置づけを更新するケースに対応する、より高度な抽出アーキテクチャの検討
 
 いずれも実装には踏み込まず、`docs/troubleshooting_log.md`に記録するに留めている。次回、どちらかに着手する形で続きを検証したい。
+
+[^1]: `GraphCypherQAChain.from_llm()`は`cypher_prompt`にカスタムプロンプトを渡せる。クラス定義は[LangChain APIリファレンス(GraphCypherQAChain)](https://python.langchain.com/api_reference/community/chains/langchain_community.chains.graph_qa.cypher.GraphCypherQAChain.html)を参照(なお本文中でも触れた通り、このクラス自体は`langchain-community`パッケージの一部として非推奨化が進んでおり、将来的には`langchain-neo4j`パッケージ版への移行が案内されている)。
 
 ---
 

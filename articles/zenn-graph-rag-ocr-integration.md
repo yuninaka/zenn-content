@@ -70,7 +70,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 """
 ```
 
-PDF化には`weasyprint`(純Python実装のHTML/CSS→PDF変換ライブラリ)を採用した。Playwrightのようなヘッドレスブラウザを使う方法も検討したが、ブラウザバイナリのダウンロードが不要で軽量な点を優先した。
+PDF化には[`weasyprint`](https://weasyprint.org/)(純Python実装のHTML/CSS→PDF変換ライブラリ)を採用した。Playwrightのようなヘッドレスブラウザを使う方法も検討したが、ブラウザバイナリのダウンロードが不要で軽量な点を優先した。
 
 ```python
 from weasyprint import HTML
@@ -81,7 +81,7 @@ HTML(string=html, base_url=str(OUTPUT_DIR)).write_pdf(pdf_path)
 
 ## 4. Document Intelligenceとの連携
 
-Azureで無料枠(F0)のDocument Intelligenceリソースを作成し、`prebuilt-layout`モデル(汎用的なレイアウト解析+テキスト抽出)にPDFを投げる。SDKは`azure-ai-documentintelligence`(バージョン1.0.2)を使用した。
+Azureで無料枠(F0)のDocument Intelligenceリソースを作成し、`prebuilt-layout`モデル(汎用的なレイアウト解析+テキスト抽出)[^2]にPDFを投げる。SDKは`azure-ai-documentintelligence`(バージョン1.0.2)を使用した。
 
 ```python
 from azure.ai.documentintelligence import DocumentIntelligenceClient
@@ -167,6 +167,7 @@ Azure Document Intelligenceによる実際のAI-OCR連携を検証し、平均�
 次回は、これらのいずれかに進みたい。
 
 [^1]: `difflib.SequenceMatcher(None, a, b).ratio()` は `2.0 * M / T` で計算される。`M`は2つの文字列(`a`, `b`)から見つかった一致ブロックの文字数の合計、`T`は両方の文字列の長さの合計(`len(a) + len(b)`)。両方の文字列が完全に一致すれば`M = len(a) = len(b)`となり、比率は`1.0`になる。単なる「編集距離」ではなく、Ratcliff/Obershelpアルゴリズム(最長共通部分文字列を再帰的に探す方式)で一致ブロックを見つける点が特徴。詳細は[Python公式ドキュメント(difflib)](https://docs.python.org/3/library/difflib.html)を参照。
+[^2]: `prebuilt-layout`は表・選択マーク・見出し構造等を含む汎用的なドキュメントのレイアウトを解析するモデル。詳細は[Azure公式ドキュメント(Document Intelligenceのレイアウトモデル)](https://learn.microsoft.com/azure/ai-services/document-intelligence/prebuilt/layout)を参照。
 
 ---
 

@@ -142,7 +142,7 @@ RETURN r.report_id, s.name, c.name
 
 今回の合成データは1レポートあたり数百字程度で十分短いため、基本的には「レポート単位=チャンク単位」とした。`RecursiveCharacterTextSplitter(chunk_size=400, chunk_overlap=50)` は保険として入れているが、実際にはほぼ分割されない。実案件でより長い文書(仕様書・図面添付テキスト等)を扱う場合はオーバーラップ付き分割が必須になる、という拡張ポイントをコードコメントで明示した。
 
-埋め込みモデルはAPI課金を避けるため、ローカルで動く多言語モデル `intfloat/multilingual-e5-small` を採用。日本語の意味検索にも対応できる。
+埋め込みモデルはAPI課金を避けるため、ローカルで動く多言語モデル [`intfloat/multilingual-e5-small`](https://huggingface.co/intfloat/multilingual-e5-small) を採用。日本語の意味検索にも対応できる。
 
 ### 5.2 グラフDB: エンティティ抽出とNeo4jへの投入
 
@@ -161,7 +161,7 @@ MERGE (a:Action {name: $action})
 MERGE (c)-[:RESOLVED_BY]->(a)
 ```
 
-`MERGE`はキーが一致すれば既存ノードを再利用するため、同じ設備名・同じ症状名であれば自動的にノードが統合される。裏を返すと、**文字列が1文字でも違えば別ノードとして分裂する**という性質でもあり、これが後述の不具合の元になった。
+`MERGE`はキーが一致すれば既存ノードを再利用するため、同じ設備名・同じ症状名であれば自動的にノードが統合される[^1]。裏を返すと、**文字列が1文字でも違えば別ノードとして分裂する**という性質でもあり、これが後述の不具合の元になった。
 
 ### 5.3 コスト設計: Claude Code定額とAPI課金の使い分け
 
@@ -202,7 +202,7 @@ result = subprocess.run(["claude", "-p", prompt], capture_output=True, text=True
 
 `vector_search`(Retriever)と`graph_query`(`GraphCypherQAChain`: 自然言語→Cypher変換→実行→自然言語回答)の2つをツールとして持たせ、Agent自身にどちらを使うか判断させる構成にした。
 
-実装中、LangChainのメジャーバージョンアップ(1.x系)でAgent構築APIが刷新されていたことに気づかず、しばらくハマった。
+実装中、LangChainのメジャーバージョンアップ(1.x系)でAgent構築APIが刷新されていたことに気づかず、しばらくハマった[^2]。
 
 ```python
 # 旧API(LangChain 0.x系): 廃止済み
@@ -351,6 +351,9 @@ RETURN count(r) AS occurrence_count
 1. Symptomノードの名寄せ対応(カテゴリ辞書 or ベクトル類似度ベースのファジーマッチ)を実装し、Q1のスコア改善を検証する
 2. 合成データを30〜50件程度に拡張し、ノード種別(部品の型番・メーカー等)を増やす
 3. Azure Document Intelligenceの無料枠でOCR部分を実装し、パイプラインを実案件の構成によりを近づける
+
+[^1]: `MERGE`はパターンを検索し、既存であればそれを返し、存在しなければ新規作成する。詳細は[Neo4j公式Cypherマニュアル(MERGE)](https://neo4j.com/docs/cypher-manual/current/clauses/merge/)を参照。
+[^2]: `create_tool_calling_agent`と`AgentExecutor`の組み合わせに代わり、LangGraphベースの`create_agent`が新しい標準APIになった。実際に`inspect.signature(create_agent)`で確認したところ、docstring内に案内先として[LangChain公式ドキュメント(Agents)](https://docs.langchain.com/oss/python/langchain/agents)が明記されていた。
 
 ---
 
