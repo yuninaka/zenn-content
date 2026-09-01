@@ -94,7 +94,7 @@ result = poller.result()
 extracted_text = result.content
 ```
 
-抽出結果(`result.content`)を、正解データ(元のJSONLの内容を帳票テンプレート通りに組み立てたもの)と`difflib.SequenceMatcher`で比較し、類似度スコアを算出する。
+抽出結果(`result.content`)を、正解データ(元のJSONLの内容を帳票テンプレート通りに組み立てたもの)と`difflib.SequenceMatcher`で比較し、類似度スコアを算出する[^1]。
 
 ### つまずき:単純な文字列比較だとノイズを誤りとしてカウントする
 
@@ -165,6 +165,8 @@ Azure Document Intelligenceによる実際のAI-OCR連携を検証し、平均�
 3. **もっと広いデータでの検証**: 記事3から持ち越している、件数が数百〜数千件規模になったときの挙動の検証
 
 次回は、これらのいずれかに進みたい。
+
+[^1]: `difflib.SequenceMatcher(None, a, b).ratio()` は `2.0 * M / T` で計算される。`M`は2つの文字列(`a`, `b`)から見つかった一致ブロックの文字数の合計、`T`は両方の文字列の長さの合計(`len(a) + len(b)`)。両方の文字列が完全に一致すれば`M = len(a) = len(b)`となり、比率は`1.0`になる。単なる「編集距離」ではなく、Ratcliff/Obershelpアルゴリズム(最長共通部分文字列を再帰的に探す方式)で一致ブロックを見つける点が特徴。
 
 ---
 
