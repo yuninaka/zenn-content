@@ -70,5 +70,8 @@ published: true
 
 10記事を通じて見つかった静かなバグは、どれも「動いているように見える」状態で紛れ込んでいた。それを見つけられたのは、スコアやAIの説明を信じたからではなく、実データ・生ログ・実際の状態を直接確認したからだった。AIと協働する上での実務力は、コードを1行残らず書ける力よりも、**「動いている」と「正しい」の間にある溝を、どこで・どう埋めるかを設計し続けられる力**にあると考えている。
 
+なお、この検証習慣を徹底したことが、後にClaude Code自体の階層型エージェント間で報告が届かない不具合の発見にもつながった。
+https://zenn.dev/yuninaka/articles/agent-delegation-report-loss
+
 - グラフRAG × ベクトルRAGシリーズ: https://zenn.dev/yuninaka/articles/zenn-graph-rag-limitations
 - レガシーJavaリバースマイグレーションシリーズ: https://zenn.dev/yuninaka/articles/legacy-ai-test-gen
