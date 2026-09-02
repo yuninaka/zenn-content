@@ -73,5 +73,20 @@ published: true
 なお、この検証習慣を徹底したことが、後にClaude Code自体の階層型エージェント間で報告が届かない不具合の発見にもつながった。
 https://zenn.dev/yuninaka/articles/agent-delegation-report-loss
 
+最後に1点。この記事で整理した方針は、自分の中に留めるだけでなく、**AIの個人設定(CLAUDE.md)に恒久ルールとして書き加えている**。[第4弾記事](https://zenn.dev/yuninaka/articles/delegated-audit-workflow)で触れた監査委譲の型と同様、今回も例えば以下のようなルールを追加した。
+
+```
+- MUST verify a golden file's expected values against the ground-truth
+  source, not just whether the test currently passes — a golden file can
+  itself encode a wrong expectation, and a passing test then only proves
+  the code matches that wrong expectation, not that the code is correct.
+- Asking an AI/agent to explain its own output is NOT a verification step,
+  even when the explanation is fluent and plausible. An AI produces a
+  coherent post-hoc rationale regardless of whether it reflects the actual
+  cause.
+```
+
+セッションが変わればAIの「学び」自体は引き継がれない、と別の記事で書いた通り、この形で外部のルールファイルに資産化しておくことが、検証習慣を属人化させずに次のセッション・次の環境でも再現させる、今のところの現実的な落としどころだと考えている。
+
 - グラフRAG × ベクトルRAGシリーズ: https://zenn.dev/yuninaka/articles/zenn-graph-rag-limitations
 - レガシーJavaリバースマイグレーションシリーズ: https://zenn.dev/yuninaka/articles/legacy-ai-test-gen
