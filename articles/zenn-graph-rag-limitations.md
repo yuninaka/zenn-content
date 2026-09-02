@@ -357,10 +357,11 @@ RETURN count(r) AS occurrence_count
 
 ---
 
-**この記事は5部構成です。**
+**この記事は6部構成です。**
 
 - 第1弾(本記事): グラフRAG × ベクトルRAGの全体設計と精度評価
 - 第2弾: [グラフRAGの「名寄せ」を直したら、直した先で別のバグが見つかった話](https://zenn.dev/yuninaka/articles/zenn-graph-rag-symptom-normalization) — 上記9.2の1番目(Symptom名寄せ)を実際に実装し、その過程で見つかった別のバグと、精度評価スコアの見かけと中身の乖離についてまとめました
 - 第3弾: [件数が増えても壊れない「履歴を踏まえた抽出」をグラフRAGに実装する](https://zenn.dev/yuninaka/articles/zenn-graph-rag-backreference-detection) — 第2弾で残した「過去レポート履歴を踏まえた抽出」の課題に、スケールする設計で取り組みました
 - 第4弾: [デジタルネイティブPDFなのに「O」を「〇」と誤読した、Document Intelligenceの話](https://zenn.dev/yuninaka/articles/zenn-graph-rag-ocr-integration) — 上記9.2の3番目(Azure Document Intelligence連携)を実際に検証しました
 - 第5弾: [OCRの誤読をLLMが勝手に直した話——グラフRAGパイプライン完成編](https://zenn.dev/yuninaka/articles/zenn-graph-rag-pipeline-completion) — OCR結果を既存パイプラインに接続し、誤読の伝播を実測しました
+- 第6弾: [OCRの空白ノイズをLLMは「別の正しい言葉」に直していた——ベクトルRAG編](https://zenn.dev/yuninaka/articles/zenn-graph-rag-vector-ocr) — ベクトルインデックス側もOCR由来データに対応させ、グラフ側との違いを実測しました
