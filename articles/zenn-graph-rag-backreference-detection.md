@@ -204,10 +204,11 @@ R022の誤りは、9問のgolden_qaのスコアには一切影響しなかった
 
 ---
 
-**この記事は5部構成です。**
+**この記事は6部構成です。**
 
 - 第1弾: [グラフRAG × ベクトルRAG 個人実証:設備保全ナレッジベースで見えた限界](https://zenn.dev/yuninaka/articles/zenn-graph-rag-limitations) — 全体のアーキテクチャ設計と精度評価、Q1(0.00)の発見まで
 - 第2弾: [グラフRAGの「名寄せ」を直したら、直した先で別のバグが見つかった話](https://zenn.dev/yuninaka/articles/zenn-graph-rag-symptom-normalization) — Symptom正規化の実装で見つかった、グラフ設計のクロス混入バグと評価スコアの見かけと中身の乖離
 - 第3弾(本記事): 過去レポート履歴を踏まえた抽出を、スケールする設計で実装
 - 第4弾: [デジタルネイティブPDFなのに「O」を「〇」と誤読した、Document Intelligenceの話](https://zenn.dev/yuninaka/articles/zenn-graph-rag-ocr-integration) — Azure Document Intelligence連携を実際に検証しました
 - 第5弾: [OCRの誤読をLLMが勝手に直した話——グラフRAGパイプライン完成編](https://zenn.dev/yuninaka/articles/zenn-graph-rag-pipeline-completion) — OCR結果を既存パイプラインに接続し、誤読の伝播を実測しました
+- 第6弾: [OCRの空白ノイズをLLMは「別の正しい言葉」に直していた——ベクトルRAG編](https://zenn.dev/yuninaka/articles/zenn-graph-rag-vector-ocr) — ベクトルインデックス側もOCR由来データに対応させ、グラフ側との違いを実測しました
