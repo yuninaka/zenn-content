@@ -178,7 +178,7 @@ def test_heading_aware_falls_back_to_single_chunk_when_no_headings():
 
 見出しがなければ本文全体を1チャンクとして返すガードを追加して解消した。
 
-**`overlap_tokens >= max_tokens`で無限ループの恐れ**: 固定長チャンクの窓をずらす幅(`step = max_tokens - overlap_tokens`)が0以下になると、窓の開始位置が進まなくなる。呼び出し側の設定ミスを早期に弾くため、事前にバリデーションを追加した。
+**`overlap_tokens >= max_tokens`で無限ループの恐れ**: 固定長チャンクのウィンドウ(切り出し範囲)をずらす幅(`step = max_tokens - overlap_tokens`)が0以下になると、ウィンドウの開始位置が進まなくなる。呼び出し側の設定ミスを早期に弾くため、事前にバリデーションを追加した。
 
 ```python
 if overlap_tokens >= max_tokens:
