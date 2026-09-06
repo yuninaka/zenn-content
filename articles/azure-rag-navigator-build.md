@@ -119,14 +119,14 @@ def _build_fields() -> list[SearchField]:
 
 ### 4.2 実測でハマった話:次元不一致と`.env`のコピペ事故
 
-インデックス設計を終えた段階では、Azureサブスクリプションがまだ準備できていなかったため、スキーマ定義の単体テストのみで一旦PRをマージした。数日後にサブスクリプションが準備できたので、実リソースに対して疎通確認スクリプトを流したところ、chat・embedding両方のデプロイで`DeploymentNotFound`が返ってきた。
+インデックス設計を終えた段階では、Azureサブスクリプションがまだ準備できていなかったため、スキーマ定義の単体テストのみで一旦PRをマージした。数日後にサブスクリプションが準備できたので、実リソースに対して疎通確認スクリプト[^1]を流したところ、chat・embedding両方のデプロイで`DeploymentNotFound`が返ってきた。
 
 ```
 {'error': {'code': 'DeploymentNotFound', 'message': 'The API deployment for
 this resource does not exist...'}}
 ```
 
-デプロイ名を実際の値(`gpt-4.1-mini-1`、`text-embedding-3-small`)に直しても症状は変わらず、埋め込み・チャットの両方が同時に失敗するのは「デプロイ名」ではなく「エンドポイント自体」を疑うべきサインだった。`.env`から読み込んだ値をコードから直接ダンプして確認したところ、原因はこれだった。
+デプロイ名を実際の値(`gpt-4.1-mini-1`、`text-embedding-3-small`)に直しても症状は変わらず、埋め込み・チャットの両方が同時に失敗するのは「デプロイ名」ではなく「エンドポイント自体」を疑うべきサインだった。`.env`から読み込んだ値をコードから直接ダンプして確認したところ[^2]、原因はこれだった。
 
 ```
 AZURE_OPENAI_ENDPOINT=AZURE_OPENAI_ENDPOINT=https://xxxxx.openai.azure.com/
@@ -191,7 +191,7 @@ if overlap_tokens >= max_tokens:
 
 ### 5.4 実リソースへの投入と検索確認
 
-3方針合計99件を実際のAzure AI Searchに投入し、キーワード検索で動作確認した。
+3方針合計99件を実際のAzure AI Searchに投入し、投入件数[^3]とキーワード検索で動作確認した。
 
 ```python
 results = client.search(
@@ -264,7 +264,7 @@ get_history(10件): 88.1 ms
 
 ### 7.1 マネージドサービスは「インフラ管理」を消す代わりに「SDKバージョン差異」を持ち込む
 
-Neo4j検証ではDB自体のホスティングを気にする必要がほぼなかったが、Azure AI Search・Cosmos DBでも同様にサーバー管理は不要だった。一方で、`azure-search-documents`が12.0.0という比較的新しいメジャーバージョンだったため、ドキュメントやネット記事のサンプルコードに書かれている名前と、実際にインストールされるSDKでの名前が違っている場面に何度か遭遇した。例えば、ネットの記事でよく見る`SearchFieldDataType.DATETIMEOFFSET`という列挙値は、今回インストールしたバージョンでは`DATE_TIME_OFFSET`に変わっており、「動くはずのサンプルコードがそのまま動かない」場面が何度かあった。都度インストール済みパッケージのソースを直接読んで確認する必要があり、マネージドサービスならではの「クライアントSDKの世代差」という新しい検討事項に気づけた。
+Neo4j検証ではDB自体のホスティングを気にする必要がほぼなかったが、Azure AI Search・Cosmos DBでも同様にサーバー管理は不要だった。一方で、`azure-search-documents`が12.0.0という比較的新しいメジャーバージョンだったため、ドキュメントやネット記事のサンプルコードに書かれている名前と、実際にインストールされるSDKでの名前が違っている場面に何度か遭遇した。例えば、ネットの記事でよく見る`SearchFieldDataType.DATETIMEOFFSET`という列挙値は、今回インストールしたバージョンでは`DATE_TIME_OFFSET`に変わっており、「動くはずのサンプルコードがそのまま動かない」場面が何度かあった。都度インストール済みパッケージのソースを直接読んで確認する必要があり[^4]、マネージドサービスならではの「クライアントSDKの世代差」という新しい検討事項に気づけた。
 
 ### 7.2 「あり得ないはず」の境界条件は、実データの形状に依存せず先回りする
 
@@ -285,3 +285,8 @@ Azure OpenAI Service・Azure AI Search・Cosmos DBという3つのマネージ�
 - **第3回(予定)**: Step7〜8(Azure App Serviceデプロイ・GitHub Actions CI/CD・Bicepによる IaC化)。マネージド構成での運用上の利点・注意点を扱う予定
 
 次回は実際にRAG回答生成ロジックを実装し、golden_qaでの精度評価とグラフRAGとの比較に進みます。
+
+[^1]: `scripts/verify_azure_connectivity.py`として実装し、`uv run python scripts/verify_azure_connectivity.py`で実行する。Azure OpenAI(埋め込み生成・チャット応答)、Azure AI Search(インデックスの作成/更新)、Cosmos DB(データベース/コンテナの作成)への接続を1コマンドでまとめて確認できる。エンドポイントやAPIキーの値は標準出力に一切出さず、成功/失敗と非機微な付随情報のみを表示する設計にした。
+[^2]: `python -c "from src.config import load_azure_openai_config; print(load_azure_openai_config().endpoint)"`のように、エンドポイントの値だけを標準出力に表示するワンライナーをその場で書いて確認した。APIキーなど機微な値はこの種の調査でも出力しないようにしている。
+[^3]: `SearchClient.get_document_count()`で、インデックス全体の件数が想定通り99件(21+38+40)になっていることを確認した。
+[^4]: 例えば`python -c "import inspect; from azure.search.documents.indexes.models import SearchField; print(inspect.signature(SearchField.__init__))"`のようにインストール済みパッケージのクラスをその場でimportして`inspect.signature`で確認したり、`.venv/lib/.../site-packages/azure/search/documents/`配下の実装ファイルを`grep`で検索して該当する列挙値・メソッドのシグネチャを直接読んだりした。
