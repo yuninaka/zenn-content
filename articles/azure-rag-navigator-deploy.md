@@ -32,7 +32,7 @@ published: true
 
 ### 2.1 なぜ今、品質ゲートを強化したか
 
-Step1〜6は、pytestによる単体テストと実リソースに対する動作確認を都度行いながら進めてきたが、Ruff・mypyの設定は初期状態のまま緩かった。デプロイフェーズに入る前に、[「レビューをやめた話」](https://zenn.dev/singularity/articles/stopped-reviewing-my-code)で紹介されている考え方(型・lintのゲートを厳しくすることで、人間のレビューが「ロジックの妥当性」に集中できるようにする)をこのプロジェクトにも適用することにした。
+Step1〜6は、pytestによる単体テストと実リソースに対する動作確認を都度行いながら進めてきたが、Ruff・mypyの設定は初期状態のまま緩かった。デプロイフェーズに入る前に、[「レビューをやめた話」](https://zenn.dev/singularity/articles/stopped-reviewing-my-code)で紹介されている考え方(型・lintのゲートを厳しくすることで、人間のレビューが「ロジックの妥当性」に集中できるようにする)をこのプロジェクトにも適用することにした。元記事はTypeScript/ESLint/Vitestという構成だったが、今回はPython/uvのエコシステムに合わせて、ESLint相当をRuff(+ mypy strict)、Vitest相当をpytest、knip相当をvultureに置き換える形で適用した。
 
 導入したのは4つのツールで、それぞれ役割と「ビルドを失敗させるか」を分けている。
 
