@@ -287,7 +287,7 @@ Azure OpenAI Service・Azure AI Search・Cosmos DBという3つのマネージ�
 この記事は全3回シリーズの第1回(構築編)です。
 
 - **第1回(本記事)**: Step1〜3(インデックス設計・インジェストパイプライン・セッション管理)
-- **第2回(予定)**: Step4〜6(RAG回答生成・引用元提示・チャットUI・golden_qa精度評価)。ここでチャンク分割方針ごとの精度比較と、Neo4jグラフRAGとの精度・実装コスト比較を行う予定
+- **第2回**: [Step4〜6(RAG回答生成・引用元提示・チャットUI・golden_qa精度評価)](https://zenn.dev/yuninaka/articles/azure-rag-navigator-eval)
 - **第3回(予定)**: Step7〜8(Azure App Serviceデプロイ・GitHub Actions CI/CD・Bicepによる IaC化)。マネージド構成での運用上の利点・注意点を扱う予定
 
 次回は実際にRAG回答生成ロジックを実装し、golden_qaでの精度評価とグラフRAGとの比較に進みます。
