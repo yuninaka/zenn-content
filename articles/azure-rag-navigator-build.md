@@ -75,8 +75,12 @@ flowchart TB
         Chunk["チャンク分割(3方針)"]
         EmbedBatch["埋め込み生成"]
     end
-    Docs --> Chunk --> EmbedBatch -->|投入| Index
+    Docs --> Chunk --> EmbedBatch
+    EmbedBatch -->|呼び出し| Embed
+    EmbedBatch -->|投入| Index
 ```
+
+インジェスト時(埋め込み生成)とチャット時(質問の埋め込み生成)は、どちらも同じAzure OpenAI Serviceのtext-embedding-3-largeを呼び出しており、実装上も`src/ingestion/embed.py`の`embed_texts`という同一の関数を共有している。
 
 回答生成モデルには`gpt-4o`ではなく`gpt-4.1-mini`を採用した。理由は単純で、検証用サブスクリプションのクォータ制約でデプロイできるモデルの選択肢が限られていたため。コスト効率の観点でも今回の検証規模には十分と判断した。
 
