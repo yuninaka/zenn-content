@@ -76,7 +76,7 @@ flowchart TB
         EmbedBatch["埋め込み生成"]
     end
     Docs --> Chunk --> EmbedBatch
-    EmbedBatch -->|呼び出し| Embed
+    EmbedBatch -->|チャンク本文| Embed
     EmbedBatch -->|投入| Index
 ```
 
