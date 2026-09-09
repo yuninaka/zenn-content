@@ -290,8 +290,6 @@ Azure OpenAI Service・Azure AI Search・Cosmos DBという3つのマネージ�
 - **第2回**: [Step4〜6(RAG回答生成・引用元提示・チャットUI・golden_qa精度評価)](https://zenn.dev/yuninaka/articles/azure-rag-navigator-eval)
 - **第3回**: [Step7〜8(Azure App Serviceデプロイ・GitHub Actions CI/CD・Bicepによる IaC化)](https://zenn.dev/yuninaka/articles/azure-rag-navigator-deploy)
 
-次回は実際にRAG回答生成ロジックを実装し、golden_qaでの精度評価とグラフRAGとの比較に進みます。
-
 [^1]: `scripts/verify_azure_connectivity.py`として実装し、`uv run python scripts/verify_azure_connectivity.py`で実行する。Azure OpenAI(埋め込み生成・チャット応答)、Azure AI Search(インデックスの作成/更新)、Cosmos DB(データベース/コンテナの作成)への接続を1コマンドでまとめて確認できる。エンドポイントやAPIキーの値は標準出力に一切出さず、成功/失敗と非機微な付随情報のみを表示する設計にした。
 [^2]: `python -c "from src.config import load_azure_openai_config; print(load_azure_openai_config().endpoint)"`のように、エンドポイントの値だけを標準出力に表示するワンライナーをその場で書いて確認した。APIキーなど機微な値はこの種の調査でも出力しないようにしている。
 [^3]: `SearchClient.get_document_count()`で、インデックス全体の件数が想定通り99件(21+38+40)になっていることを確認した。

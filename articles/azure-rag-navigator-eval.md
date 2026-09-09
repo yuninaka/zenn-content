@@ -245,8 +245,6 @@ Step4(RAG回答生成・引用元提示)、Step5(Streamlitチャット UI)、Ste
 - **第2回(本記事)**: Step4〜6(RAG回答生成・引用元提示・チャットUI・golden_qa精度評価)
 - **第3回**: [Step7〜8(Azure App Serviceデプロイ・GitHub Actions CI/CD・Bicepによる IaC化)](https://zenn.dev/yuninaka/articles/azure-rag-navigator-deploy)
 
-次回は実際にAzure App Serviceへデプロイし、CI/CDパイプラインとBicepによるIaC化、そして「読まなくても壊れないコードベース」を目指した品質ゲート整備の記録に進みます。
-
 [^1]: `uv run python scripts/ask_question.py "<質問文>" <セッションID>`で1問1答形式の動作確認ができる。同一セッションIDを指定すると履歴が引き継がれる。今回は`uv run python scripts/ask_question.py "ERPNaviの初期設定はどこから始めればいいですか？" demo-step4-verify`に続けて同一セッションIDで2問目を投げ、Cosmos DBの`get_history`で保存内容も確認した。
 [^2]: `uv run streamlit run src/app/streamlit_app.py --server.headless true`でアプリを起動し、`.env`の`AZURE_OPENAI_API_KEY`を検証用に書き換えた状態でブラウザから質問を送信、画面表示とサーバー側ログの両方を確認した。
 [^3]: Playwrightの`chromium.launch(headless=True)`でブラウザを起動し、`page.goto`でStreamlitの起動URLにアクセスした上で、`page.get_by_role`等でサイドバーのボタン・`st.chat_input`を実際にクリック・入力して動作を確認した。
