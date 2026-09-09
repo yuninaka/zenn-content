@@ -243,7 +243,7 @@ Step4(RAG回答生成・引用元提示)、Step5(Streamlitチャット UI)、Ste
 
 - **第1回**: [Step1〜3(インデックス設計・インジェストパイプライン・セッション管理)](https://zenn.dev/yuninaka/articles/azure-rag-navigator-build)
 - **第2回(本記事)**: Step4〜6(RAG回答生成・引用元提示・チャットUI・golden_qa精度評価)
-- **第3回(予定)**: Step7〜8(Azure App Serviceデプロイ・GitHub Actions CI/CD・Bicepによる IaC化)。マネージド構成での運用上の利点・注意点を扱う予定
+- **第3回**: [Step7〜8(Azure App Serviceデプロイ・GitHub Actions CI/CD・Bicepによる IaC化)](https://zenn.dev/yuninaka/articles/azure-rag-navigator-deploy)
 
 次回は実際にAzure App Serviceへデプロイし、CI/CDパイプラインとBicepによるIaC化、そして「読まなくても壊れないコードベース」を目指した品質ゲート整備の記録に進みます。
 
