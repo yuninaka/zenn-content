@@ -56,7 +56,7 @@ Azure OpenAIへの呼び出しは失敗時、例外の詳細を`logging`モジ�
 
 リポジトリ: https://github.com/yuninaka/log-anomaly-detection-poc
 
-[^step3]: 前半記事および実装はPull Request [#8](https://github.com/yuninaka/log-anomaly-detection-poc/pull/8)を参照。READMEの「メタデータ層と生データ層の型分離(Step3)」節。
+[^step3]: 型分離の実装はPull Request [#8](https://github.com/yuninaka/log-anomaly-detection-poc/pull/8)を参照。READMEの「メタデータ層と生データ層の型分離(Step3)」節。前半記事全体の実装範囲(Step0〜4)はリポジトリのコミット履歴を参照。
 [^readme-results]: 数値はREADME「実測結果」節の表、およびPull Request [#14](https://github.com/yuninaka/log-anomaly-detection-poc/pull/14)の実行結果を参照。
 [^step5]: 実装はPull Request [#14](https://github.com/yuninaka/log-anomaly-detection-poc/pull/14)、マージコミット[`58e49f2`](https://github.com/yuninaka/log-anomaly-detection-poc/commit/58e49f226a8a77b6d656650612762d7f3874dc67)。READMEの「サイレント運用モード(Step5)」節を参照。
 [^step6]: 実装はPull Request [#16](https://github.com/yuninaka/log-anomaly-detection-poc/pull/16)、マージコミット[`bcf2cbd`](https://github.com/yuninaka/log-anomaly-detection-poc/commit/bcf2cbd38be1e61ba1a40e3f379123148f95243d)。READMEの「人間確認UI(Step6)」節を参照。
