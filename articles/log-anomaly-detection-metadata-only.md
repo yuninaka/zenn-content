@@ -3,7 +3,7 @@ title: "個人実証：機微データに触れないログ異常検知は成立
 emoji: "🔒"
 type: "tech"
 topics: ["python", "mypy", "machinelearning", "statistics", "security"]
-published: false
+published: true
 ---
 
 ## Part1: 課題設定
