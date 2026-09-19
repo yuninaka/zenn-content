@@ -3,7 +3,7 @@ title: "リファクタで挙動が変わった60件、そして「たまたま�
 emoji: "🧾"
 type: "tech"
 topics: ["claude", "python", "zenn", "ai駆動開発", "テスト"]
-published: true
+published: false
 ---
 
 ## 1. はじめに
