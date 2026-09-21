@@ -3,7 +3,7 @@ title: "15/15 で通ったのに、反復すると誤読する — UI 自動化�
 emoji: "🔬"
 type: "tech"
 topics: ["claude", "ai駆動開発", "テスト自動化", "windows", "delphi"]
-published: false
+published: true
 ---
 
 ## 1. はじめに
